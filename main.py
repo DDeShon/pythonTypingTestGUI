@@ -17,7 +17,7 @@ class TypeTestGUI:
         self.sample_label = tk.Label(self.frame, text=random.choice(self.text), font=("Georgia", 20), wraplength=700)
         self.sample_label.grid(row=0, column=0, columnspan=2, padx=5, pady=5)
 
-        self.input_entry = tk.Entry(self.frame, width=35, font=("Georgia", 24))
+        self.input_entry = tk.Entry(self.frame, width=50, font=("Georgia", 16))
         self.input_entry.grid(row=1, column=0, columnspan=2, padx=5, pady=5)
         self.input_entry.bind("<KeyPress>", self.start)
 

@@ -34,8 +34,21 @@ class TypeTestGUI:
 
         self.root.mainloop()
 
-    def start(self):
-        pass
+    def start(self, event):
+        if not self.running:
+            if not event.keycode in [16, 17, 18]:
+                self.running = True
+                t = threading.Thread(target=self.time_thread)
+                t.start()
+
+        if not self.sample_label.cget('text') == self.input_entry.get():
+            self.input_entry.config(fg="red")
+        else:
+            self.input_entry.config(fg="black")
+
+        if self.input_entry.get() == self.sample_label.cget('text'):
+            self.running = False
+            self.input_entry.config(fg="green")
 
     def time_thread(self):
         while self.running:
@@ -48,4 +61,4 @@ class TypeTestGUI:
     def reset(self):
         pass
 
-
+TypeTestGUI()

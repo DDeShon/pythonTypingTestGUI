@@ -21,7 +21,8 @@ class TypeTestGUI:
         self.input_entry.grid(row=1, column=0, columnspan=2, padx=5, pady=5)
         self.input_entry.bind("<KeyPress>", self.start)
 
-        self.speed_label = tk.Label(self.frame, text="\nTyping Speed:  \n\n0.00 Words Per Second\n0.00 Words Per Minute\n", font=("Georgia", 20))
+        self.speed_label = tk.Label(self.frame, text="\nTyping Speed:  \n\n0.00 Words Per Second"
+                                                     "\n0.00 Words Per Minute\n", font=("Georgia", 20))
         self.speed_label.grid(row=2, column=0, columnspan=2, padx=5, pady=10)
 
         self.reset_button = tk.Button(self.frame, text="Reset", command=self.reset)

@@ -25,7 +25,7 @@ class TypeTestGUI:
                                                      "\n0.00 Words Per Minute\n", font=("Georgia", 20))
         self.speed_label.grid(row=2, column=0, columnspan=2, padx=5, pady=10)
 
-        self.reset_button = tk.Button(self.frame, text="Reset", command=self.reset)
+        self.reset_button = tk.Button(self.frame, text="Reset", command=self.reset, font=("Georgia", 20))
         self.reset_button.grid(row=3, column=0, columnspan=2, padx=5, pady=10)
 
         self.frame.pack(expand=True)

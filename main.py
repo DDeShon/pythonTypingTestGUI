@@ -10,7 +10,7 @@ class TypeTestGUI:
         self.root.title("Typing Test Application")
         self.root.geometry("800x600")
 
-        self.texts = open("texts.txt", "r").read().split("\n")
+        self.texts = open("text.txt", "r").read().split("\n")
 
         self.frame = tk.Frame(self.root)
 
@@ -19,7 +19,7 @@ class TypeTestGUI:
 
         self.input_entry = tk.Entry(self.frame, width=40, font=("Georgia", 24))
         self.input_entry.grid(row=1, column=0, columnspan=2, padx=5, pady=10)
-        self.input_entry.bind("<KeyDown>", self.start)
+        self.input_entry.bind("<KeyPress>", self.start)
 
         self.speed_label = tk.Label(self.frame, text="Typing Speed:  \n0.00 WPS\n0.00 WPM", font=("Georgia", 20))
         self.speed_label.grid(row=2, column=0, columnspan=2, padx=5, pady=10)

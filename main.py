@@ -19,7 +19,7 @@ class TypeTestGUI:
 
         self.input_entry = tk.Entry(self.frame, width=50, font=("Georgia", 16))
         self.input_entry.grid(row=1, column=0, columnspan=2, padx=5, pady=5)
-        self.input_entry.bind("<KeyPress>", self.start)
+        self.input_entry.bind("<KeyRelease>", self.start)
 
         self.speed_label = tk.Label(self.frame, text="\nTyping Speed:  \n\n0.00 Words Per Second"
                                                      "\n0.00 Words Per Minute\n", font=("Georgia", 20))

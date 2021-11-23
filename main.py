@@ -2,27 +2,26 @@ import tkinter as tk
 import time
 import threading
 import random
-import textwrap
 
 class TypeTestGUI:
 
     def __init__(self):
         self.root = tk.Tk()
         self.root.title("Typing Test Application")
-        self.root.geometry("1500x600")
+        self.root.geometry("800x600")
 
-        self.texts = open("text.txt", "r").read().split("\n")
+        self.text = open("text.txt", "r").read().split("\n")
 
         self.frame = tk.Frame(self.root)
 
-        self.sample_label = tk.Label(self.frame, text=random.choice(self.texts), font=("Georgia", 20))
+        self.sample_label = tk.Label(self.frame, text=random.choice(self.text), font=("Georgia", 20), wraplength=700)
         self.sample_label.grid(row=0, column=0, columnspan=2, padx=5, pady=5)
 
-        self.input_entry = tk.Entry(self.frame, width=40, font=("Georgia", 24))
-        self.input_entry.grid(row=1, column=0, columnspan=2, padx=5, pady=10)
+        self.input_entry = tk.Entry(self.frame, width=35, font=("Georgia", 24))
+        self.input_entry.grid(row=1, column=0, columnspan=2, padx=5, pady=5)
         self.input_entry.bind("<KeyPress>", self.start)
 
-        self.speed_label = tk.Label(self.frame, text="Typing Speed:  \n0.00 WPS\n0.00 WPM", font=("Georgia", 20))
+        self.speed_label = tk.Label(self.frame, text="\nTyping Speed:  \n\n0.00 Words Per Second\n0.00 Words Per Minute\n", font=("Georgia", 20))
         self.speed_label.grid(row=2, column=0, columnspan=2, padx=5, pady=10)
 
         self.reset_button = tk.Button(self.frame, text="Reset", command=self.reset)
@@ -42,7 +41,7 @@ class TypeTestGUI:
                 t = threading.Thread(target=self.time_thread)
                 t.start()
 
-        if not self.sample_label.cget('text') == self.input_entry.get():
+        if not self.sample_label.cget('text').startswith(self.input_entry.get()):
             self.input_entry.config(fg="red")
         else:
             self.input_entry.config(fg="black")
@@ -55,11 +54,15 @@ class TypeTestGUI:
         while self.running:
             time.sleep(0.1)
             self.counter += 0.1
-            wps = (len(self.input_entry.get()) / self.counter) / 5
+            wps = len(self.input_entry.get().split(" ")) / self.counter
             wpm = wps * 60
-            self.speed_label.config(text=f"Speed: \n{wps:.2f} WPS\n{wpm:.2f} WPM")
+            self.speed_label.config(text=f"\nTyping Speed: \n\n{wps:.2f} Words Per Second\n{wpm:.2f} Words Per Minute\n")
 
     def reset(self):
-        pass
+        self.running = False
+        self.counter = 0
+        self.speed_label.config(text="\nTyping Speed:  \n\n0.00 Words Per Second\n0.00 Words Per Minute\n")
+        self.sample_label.config(text=random.choice(self.text))
+        self.input_entry.delete(0, tk.END)
 
 TypeTestGUI()

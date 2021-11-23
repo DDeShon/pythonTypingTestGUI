@@ -2,13 +2,14 @@ import tkinter as tk
 import time
 import threading
 import random
+import textwrap
 
 class TypeTestGUI:
 
     def __init__(self):
         self.root = tk.Tk()
         self.root.title("Typing Test Application")
-        self.root.geometry("800x600")
+        self.root.geometry("1500x600")
 
         self.texts = open("text.txt", "r").read().split("\n")
 
@@ -54,9 +55,9 @@ class TypeTestGUI:
         while self.running:
             time.sleep(0.1)
             self.counter += 0.1
-            wps = round(len((self.input_entry.get()) / self.counter) / 5)
+            wps = (len(self.input_entry.get()) / self.counter) / 5
             wpm = wps * 60
-            self.speed_label.config(text=f"Speed: \n{wps:.2f} WPS\n{wps:.2f} WPM")
+            self.speed_label.config(text=f"Speed: \n{wps:.2f} WPS\n{wpm:.2f} WPM")
 
     def reset(self):
         pass
